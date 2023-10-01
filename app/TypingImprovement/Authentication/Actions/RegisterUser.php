@@ -12,6 +12,8 @@ use Illuminate\Validation\ValidationException;
 class RegisterUser implements RegistersUser
 {
     /**
+     *  Register a new user.
+     *
      * @throws ValidationException
      */
     public function registerUser(array $input): void

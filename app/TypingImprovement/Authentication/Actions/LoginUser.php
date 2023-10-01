@@ -11,6 +11,8 @@ use Illuminate\Validation\ValidationException;
 class LoginUser implements LoginsUser
 {
     /**
+     * Login a user.
+     *
      * @throws ValidationException|LoginException
      */
     public function loginUser(array $input): void
