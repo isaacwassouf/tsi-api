@@ -10,4 +10,5 @@ Route::group([
 ], function () {
     Route::post('register', [AuthenticationController::class, 'register']);
     Route::post('login', [AuthenticationController::class, 'login'])->middleware('web');
+    Route::post('logout', [AuthenticationController::class, 'logout']);
 });

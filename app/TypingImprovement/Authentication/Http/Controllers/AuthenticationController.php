@@ -6,11 +6,13 @@ namespace App\TypingImprovement\Authentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\TypingImprovement\Authentication\Contracts\LoginsUser;
+use App\TypingImprovement\Authentication\Contracts\LogsOutUser;
 use App\TypingImprovement\Authentication\Contracts\RegistersUser;
 use App\TypingImprovement\Authentication\Exceptions\LoginException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class AuthenticationController extends Controller
 {
@@ -46,6 +48,21 @@ class AuthenticationController extends Controller
             return response()->json($e->errors(), 422);
         } catch (LoginException) {
             return response()->json(['message' => 'Invalid credentials'], 400);
+        }
+    }
+
+    /**
+     * Logout a user.
+     */
+    public function logout(): Response
+    {
+        try {
+            $authenticator = app(LogsOutUser::class);
+            $authenticator->logsOutUser();
+
+            return response()->noContent(200);
+        } catch (Throwable) {
+            return response()->noContent(500);
         }
     }
 }
