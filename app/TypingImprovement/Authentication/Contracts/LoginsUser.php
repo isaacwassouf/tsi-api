@@ -12,8 +12,6 @@ interface LoginsUser
     /**
      * Login a user.
      *
-     * @param array $input
-     * @return void
      * @throws ValidationException|LoginException
      */
     public function loginUser(array $input): void;

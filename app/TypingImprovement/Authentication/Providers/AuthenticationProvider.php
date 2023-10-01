@@ -28,21 +28,17 @@ class AuthenticationProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     protected function bootRoutes(): void
     {
-        $this->loadRoutesFrom(__DIR__ . '/../Http/routes_v1.php');
+        $this->loadRoutesFrom(__DIR__.'/../Http/routes_v1.php');
     }
 
     /**
      * Register the migrations
-     *
-     * @return void
      */
     protected function bootMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
 }

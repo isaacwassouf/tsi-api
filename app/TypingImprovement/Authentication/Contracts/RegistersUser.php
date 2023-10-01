@@ -9,8 +9,6 @@ use Illuminate\Validation\ValidationException;
 interface RegistersUser
 {
     /**
-     * @param array $input
-     * @return void
      * @throws ValidationException
      */
     public function registerUser(array $input): void;

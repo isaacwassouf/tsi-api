@@ -12,8 +12,6 @@ use Illuminate\Validation\ValidationException;
 class RegisterUser implements RegistersUser
 {
     /**
-     * @param array $input
-     * @return void
      * @throws ValidationException
      */
     public function registerUser(array $input): void
@@ -21,7 +19,7 @@ class RegisterUser implements RegistersUser
         $validatedInput = $this->validateInput($input);
 
         User::create([
-            'name' => $validatedInput['first_name'] . ' ' . $validatedInput['last_name'],
+            'name' => $validatedInput['first_name'].' '.$validatedInput['last_name'],
             'email' => $validatedInput['email'],
             'password' => $validatedInput['password'],
         ]);
@@ -36,8 +34,7 @@ class RegisterUser implements RegistersUser
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed']
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ])->validateWithBag('registerUser');
     }
-
 }

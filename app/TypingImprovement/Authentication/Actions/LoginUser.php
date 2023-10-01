@@ -10,21 +10,19 @@ use Illuminate\Validation\ValidationException;
 
 class LoginUser implements LoginsUser
 {
-
     /**
-     * @param array $input
-     * @return void
      * @throws ValidationException|LoginException
      */
     public function loginUser(array $input): void
     {
         $validatedInput = $this->validateInput($input);
 
-       if (Auth::attempt($validatedInput)){
-           request()->session()->regenerate();
-           return;
-       }
-       throw new LoginException();
+        if (Auth::attempt($validatedInput)) {
+            request()->session()->regenerate();
+
+            return;
+        }
+        throw new LoginException();
     }
 
     /**
