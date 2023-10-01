@@ -56,16 +56,13 @@ class AuthenticationController extends Controller
      */
     public function logout(): Response
     {
+        try {
+            $authenticator = app(LogsOutUser::class);
+            $authenticator->logsOutUser();
 
-        $authenticator = app(LogsOutUser::class);
-        $authenticator->logsOutUser();
-
-        return response()->noContent(200);
-//        try {
-//
-//        }
-//        catch (Throwable) {
-//            return response()->noContent(500);
-//        }
+            return response()->noContent(200);
+        } catch (Throwable) {
+            return response()->noContent(500);
+        }
     }
 }
