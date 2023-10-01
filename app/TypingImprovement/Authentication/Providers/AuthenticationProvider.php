@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\TypingImprovement\Authentication\Providers;
 
+use App\TypingImprovement\Authentication\Actions\LoginUser;
 use App\TypingImprovement\Authentication\Actions\RegisterUser;
 use App\TypingImprovement\Authentication\Authentications;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,7 @@ class AuthenticationProvider extends ServiceProvider
     public function bindSingletons(): void
     {
         Authentications::registersUserUsing(RegisterUser::class);
+        Authentications::loginsUserUsing(LoginUser::class);
     }
 
     /**

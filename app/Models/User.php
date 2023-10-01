@@ -49,16 +49,6 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    // hash the password before saving it to the database
-    public static function boot(): void
-    {
-        parent::boot();
-
-        static::creating(function (User $user): void {
-            $user->password = bcrypt($user->password);
-        });
-    }
-
     /**
      * The attributes that are mass assignable.
      *

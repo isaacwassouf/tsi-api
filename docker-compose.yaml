@@ -14,11 +14,14 @@ services:
         - db_data:/var/lib/mysql
     networks:
       - internal
+      - proxy
 
 volumes:
     db_data:
 networks:
     internal:
       external: false
+    proxy:
+        external: true
 
 

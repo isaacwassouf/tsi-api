@@ -1,3 +1,6 @@
+dev:
+	php artisan serve
+
 clear-cache:
 	rm -r ./bootstrap/cache/* \
 	&& php artisan config:clear \
