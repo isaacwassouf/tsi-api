@@ -15,6 +15,7 @@ class LogOutUser implements LogsOutUser
      */
     public function logsOutUser(): void
     {
-        Auth::logout();
+        auth()->logout();
+        request()->session()->invalidate();
     }
 }
