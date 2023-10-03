@@ -28,7 +28,10 @@ class AuthenticationController extends Controller
 
             return response()->noContent(200);
         } catch (ValidationException $e) {
-            return response()->json($e->errors(), 422);
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $e->errors(),
+            ], 422);
         }
     }
 
@@ -45,7 +48,10 @@ class AuthenticationController extends Controller
 
             return response()->noContent(200);
         } catch (ValidationException $e) {
-            return response()->json($e->errors(), 422);
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => $e->errors(),
+            ], 422);
         } catch (LoginException) {
             return response()->json(['message' => 'Invalid credentials'], 400);
         }
