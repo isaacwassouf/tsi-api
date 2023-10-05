@@ -12,4 +12,5 @@ Route::group([
     Route::post('register', [AuthenticationController::class, 'register']);
     Route::post('login', [AuthenticationController::class, 'login']);
     Route::post('logout', [AuthenticationController::class, 'logout']);
+    Route::get('verify', [AuthenticationController::class, 'verifiedUser']);
 });

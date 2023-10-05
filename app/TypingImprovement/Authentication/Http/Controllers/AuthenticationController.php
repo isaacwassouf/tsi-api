@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\TypingImprovement\Authentication\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\TypingImprovement\Authentication\Contracts\LoginsUser;
 use App\TypingImprovement\Authentication\Contracts\LogsOutUser;
 use App\TypingImprovement\Authentication\Contracts\RegistersUser;
@@ -70,5 +71,26 @@ class AuthenticationController extends Controller
         } catch (Throwable) {
             return response()->noContent(500);
         }
+    }
+
+    /**
+     * Get the authenticated User.
+     */
+    public function verifiedUser(): JsonResponse
+    {
+        /** @var User|null $user */
+        $user = auth()?->user();
+
+        if ($user) {
+            return response()->json([
+                'user' => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'email' => $user->email,
+                ],
+            ], 200);
+        }
+
+        return response()->json(['message' => 'Unauthorized'], 401);
     }
 }
