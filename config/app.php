@@ -169,6 +169,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\TypingImprovement\Authentication\Providers\AuthenticationProvider::class,
+        App\TypingImprovement\Challenges\Providers\ChallengeProvider::class,
     ])->toArray(),
 
     /*

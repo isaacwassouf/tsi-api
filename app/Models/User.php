@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\TypingImprovement\Challenges\Models\Challenge;
 use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,6 +16,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * App\Models\User
@@ -31,6 +33,7 @@ use Laravel\Sanctum\PersonalAccessToken;
  * @property-read int|null $notifications_count
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
+ * @property-read Collection<int, Challenge> $challenges
  *
  * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
@@ -49,7 +52,9 @@ use Laravel\Sanctum\PersonalAccessToken;
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -81,4 +86,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Get the challenges for the user
+     *.
+     */
+    public function challenges(): HasMany
+    {
+        return $this->hasMany(Challenge::class);
+    }
 }
