@@ -1,5 +1,6 @@
 <?php
 
+use App\TypingImprovement\Users\Providers\UsersProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -155,7 +156,7 @@ return [
     |
     */
 
-    'providers' => ServiceProvider::defaultProviders()->merge([
+    'providers' => ServiceProvider::defaultProviders()->merge(providers: [
         /*
          * Package Service Providers...
          */
@@ -170,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\TypingImprovement\Authentication\Providers\AuthenticationProvider::class,
         App\TypingImprovement\Challenges\Providers\ChallengeProvider::class,
+        UsersProvider::class,
     ])->toArray(),
 
     /*
