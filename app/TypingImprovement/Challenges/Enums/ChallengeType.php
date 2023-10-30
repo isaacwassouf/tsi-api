@@ -6,8 +6,8 @@ namespace App\TypingImprovement\Challenges\Enums;
 
 enum ChallengeType: string
 {
-    case COUNTDOWNABLE = 'countdownable';
-    case NONE_COUNTDOWNABLE = 'none_countdownable';
+    case STANDARD = 'standard';
+    case COUNTDOWN = 'countdown';
 
     public static function toArray(): array
     {

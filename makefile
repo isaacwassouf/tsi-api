@@ -14,3 +14,6 @@ optimize:
 	php artisan optimize
 pint:
 	./vendor/bin/pint
+
+migrate:
+	php artisan migrate

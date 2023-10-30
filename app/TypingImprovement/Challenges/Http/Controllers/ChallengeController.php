@@ -52,7 +52,9 @@ class ChallengeController extends Controller
                 'errors' => $e->errors(),
             ], 422);
         } catch (Throwable $e) {
-            return response()->noContent(500);
+            return response()->json([
+                'message' =>  $e->getMessage(),
+            ], 500);
         }
     }
 }

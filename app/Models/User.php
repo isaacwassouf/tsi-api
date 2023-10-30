@@ -34,7 +34,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property-read Collection<int, PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read Collection<int, Challenge> $challenges
- *
  * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
@@ -47,7 +46,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static Builder|User wherePassword($value)
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
- *
+ * @property-read int|null $challenges_count
  * @mixin Eloquent
  */
 class User extends Authenticatable

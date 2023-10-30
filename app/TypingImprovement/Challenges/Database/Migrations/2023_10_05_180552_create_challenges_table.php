@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->id();
             $table->enum('challenge_type', ChallengeType::toArray());
             $table->text('full_text');
-            $table->text('completed_text');
+            $table->text('completed_text')->nullable();
             $table->string('time_taken');
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

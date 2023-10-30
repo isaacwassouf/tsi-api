@@ -21,30 +21,34 @@ class StoreChallenge implements StoresChallenge
     public function store(array $data): void
     {
         // validate the data
-        $this->validate($data);
+        $validatedData =  $this->validate($data);
 
         /** @var User $user */
         $user = auth()->user();
 
         // create the challenge
         $user->challenges()->create([
-            'challenge_type' => $data['challenge_type'],
-            'full_text' => $data['full_text'],
-            'completed_text' => $data['completed_text'],
-            'time_taken' => $data['time_taken'],
+            'challenge_type' => $validatedData['challenge_type'],
+            'quote_id' => $validatedData['quote_id'],
+            'completed_text' => $validatedData['completed_text'] ?? null,
+            'time_taken' => $validatedData['time_taken'],
+            'wpm' => $validatedData['wpm'],
+            'accuracy' => $validatedData['accuracy'],
         ]);
     }
 
     /**
      * @throws ValidationException
      */
-    private function validate(array $data): void
+    private function validate(array $data): array
     {
-        Validator::make($data, [
+        return Validator::make($data, [
             'challenge_type' => ['required', 'string', Rule::in(ChallengeType::toArray())],
-            'full_text' => ['required', 'string'],
-            'completed_text' =>  ['required', 'string'],
-            'time_taken' =>  ['required', 'string'],
+            'quote_id' => ['required', 'string'],
+            'completed_text' =>  ['sometimes', 'string'],
+            'time_taken' =>  ['required', 'numeric'],
+            'wpm' =>  ['required', 'integer'],
+            'accuracy' =>  ['required', 'numeric'],
         ])->validate();
     }
 }

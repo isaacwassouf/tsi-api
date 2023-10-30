@@ -18,17 +18,28 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property string $challenge_type
  * @property string $full_text
  * @property string $completed_text
- * @property string $time_taken
+ * @property float $time_taken
+ * @property string $quote_id
+ * @property int $wpm
+ * @property float $accuracy
  * @property int $user_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read User $user
- *
  * @method static UserFactory factory($count = null, $state = [])
  * @method static Builder|User newModelQuery()
  * @method static Builder|User newQuery()
  * @method static Builder|User query()
- *
+ * @method static Builder|Challenge whereAccuracy($value)
+ * @method static Builder|Challenge whereChallengeType($value)
+ * @method static Builder|Challenge whereCompletedText($value)
+ * @method static Builder|Challenge whereCreatedAt($value)
+ * @method static Builder|Challenge whereId($value)
+ * @method static Builder|Challenge whereQuoteId($value)
+ * @method static Builder|Challenge whereTimeTaken($value)
+ * @method static Builder|Challenge whereUpdatedAt($value)
+ * @method static Builder|Challenge whereUserId($value)
+ * @method static Builder|Challenge whereWpm($value)
  * @mixin Eloquent
  */
 class Challenge extends Model
@@ -47,6 +58,9 @@ class Challenge extends Model
         'full_text',
         'completed_text',
         'time_taken',
+        'quote_id',
+        'wpm',
+        'accuracy',
     ];
 
     /**
