@@ -17,3 +17,10 @@ pint:
 
 migrate:
 	php artisan migrate
+
+ide-models:
+	echo "yes" | php artisan ide-helper:models
+
+create-migration:
+	read -p "Enter migration name: " name; \
+	php artisan make:migration $$name
