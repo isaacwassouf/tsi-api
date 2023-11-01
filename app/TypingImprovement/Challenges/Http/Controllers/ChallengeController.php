@@ -22,7 +22,12 @@ class ChallengeController extends Controller
         /** @var User $user */
         $user = auth()->user();
 
-        $challenges = $user->challenges()->get();
+        $sortBy = request()->query('sort_by', 'created_at');
+        $sortDirection = request()->query('sort_direction', 'desc');
+
+        $challenges = $user->challenges()
+            ->orderBy($sortBy, $sortDirection)
+            ->get();
 
         return new ChallengeResourceCollection($challenges);
     }
