@@ -54,7 +54,7 @@ class Challenge extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'type',
+        'challenge_type',
         'full_text',
         'completed_text',
         'time_taken',
