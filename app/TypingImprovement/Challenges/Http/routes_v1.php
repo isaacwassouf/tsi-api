@@ -1,5 +1,6 @@
 <?php
 
+
 declare(strict_types=1);
 
 use App\TypingImprovement\Challenges\Http\Controllers\ChallengeController;
@@ -13,4 +14,6 @@ Route::group([
         ->post('/', [ChallengeController::class, 'store']);
     Route::middleware('auth:sanctum')
         ->get('/', [ChallengeController::class, 'index']);
+    Route::middleware('auth:sanctum')
+        ->get('/area-chart', [ChallengeController::class, 'fetchAreaChartData']);
 });

@@ -10,6 +10,7 @@ use App\TypingImprovement\Challenges\Contracts\StoresChallenge;
 use App\TypingImprovement\Challenges\Models\Challenge;
 use App\TypingImprovement\Challenges\Resources\ChallengeResource;
 use App\TypingImprovement\Challenges\Resources\ChallengeResourceCollection;
+use App\TypingImprovement\Challenges\Resources\ChallengesAreaChartCollection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Response;
@@ -61,5 +62,29 @@ class ChallengeController extends Controller
                 'message' =>  $e->getMessage(),
             ], 500);
         }
+    }
+
+    public function fetchAreaChartData(): ChallengesAreaChartCollection
+    {
+        /** @var User $user */
+        $user = auth()->user();
+
+        $window = request()->query('window', 'week');
+
+        $challenges = $user->challenges()
+            ->orderBy('created_at')
+            ->select(['created_at', 'wpm'])
+            ->when($window === 'today', function ($query) {
+                $query->whereDay('created_at', now()->day);
+            })
+            ->when($window === 'week', function ($query) {
+                $query->where('created_at', '>=', now()->subWeek());
+            })
+            ->when($window === 'month', function ($query) {
+                $query->where('created_at', '>=', now()->subMonth());
+            })
+            ->get();
+
+        return new ChallengesAreaChartCollection($challenges);
     }
 }
