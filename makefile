@@ -24,3 +24,10 @@ ide-models:
 create-migration:
 	read -p "Enter migration name: " name; \
 	php artisan make:migration $$name
+
+create-feature-test:
+	read -p "Enter feature test name: " name; \
+	php artisan make:test $$name
+
+run-tests:
+	php artisan test
