@@ -15,7 +15,6 @@ class LogOutUser implements LogsOutUser
      */
     public function logsOutUser(): void
     {
-        auth()->logout();
-        request()->session()->invalidate();
+        request()->user()->currentAccessToken()->delete();
     }
 }

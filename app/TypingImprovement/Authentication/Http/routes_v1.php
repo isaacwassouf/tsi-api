@@ -11,6 +11,6 @@ Route::group([
 ], function () {
     Route::post('register', [AuthenticationController::class, 'register']);
     Route::post('login', [AuthenticationController::class, 'login']);
-    Route::post('logout', [AuthenticationController::class, 'logout']);
-    Route::get('verify', [AuthenticationController::class, 'verifiedUser']);
+    Route::middleware('auth:sanctum')->post('logout', [AuthenticationController::class, 'logout']);
+    Route::middleware('auth:sanctum')-> get('verify', [AuthenticationController::class, 'verifiedUser']);
 });
