@@ -45,9 +45,9 @@ class AuthenticationController extends Controller
         try {
 
             $authenticator = app(LoginsUser::class);
-            $authenticator->loginUser($input);
+            $accessToken =  $authenticator->loginUser($input);
 
-            return response()->noContent(200);
+            return response()->json(['access_token' => $accessToken->plainTextToken]);
         } catch (ValidationException $e) {
             return response()->json([
                 'message' => 'The given data was invalid.',

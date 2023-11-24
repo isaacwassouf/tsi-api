@@ -2,11 +2,13 @@
 
 namespace App\TypingImprovement\Authentication\Actions;
 
+use App\Models\User;
 use App\TypingImprovement\Authentication\Contracts\LoginsUser;
 use App\TypingImprovement\Authentication\Exceptions\LoginException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\NewAccessToken;
 
 class LoginUser implements LoginsUser
 {
@@ -15,15 +17,17 @@ class LoginUser implements LoginsUser
      *
      * @throws ValidationException|LoginException
      */
-    public function loginUser(array $input): void
+    public function loginUser(array $input): NewAccessToken
     {
         $validatedInput = $this->validateInput($input);
 
         if (Auth::attempt($validatedInput)) {
-            request()->session()->regenerate();
-
-            return;
+            // get the user
+            $user = User::whereEmail($validatedInput['email'])->firstOrFail();
+            // generate and result a new token
+            return $user->createToken('auth-token');
         }
+        // if the auth attempt fails, throw an exception
         throw new LoginException();
     }
 

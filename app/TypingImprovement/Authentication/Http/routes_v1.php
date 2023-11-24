@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'auth',
-    'middleware' => 'web',
+    'middleware' => 'api',
 ], function () {
     Route::post('register', [AuthenticationController::class, 'register']);
     Route::post('login', [AuthenticationController::class, 'login']);

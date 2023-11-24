@@ -6,6 +6,7 @@ namespace App\TypingImprovement\Authentication\Contracts;
 
 use App\TypingImprovement\Authentication\Exceptions\LoginException;
 use Illuminate\Validation\ValidationException;
+use Laravel\Sanctum\NewAccessToken;
 
 interface LoginsUser
 {
@@ -14,5 +15,5 @@ interface LoginsUser
      *
      * @throws ValidationException|LoginException
      */
-    public function loginUser(array $input): void;
+    public function loginUser(array $input): NewAccessToken;
 }

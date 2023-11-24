@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => 'challenges',
-    'middleware' => 'web'
+    'middleware' => 'api'
 ], function () {
     Route::middleware('auth:sanctum')
         ->post('/', [ChallengeController::class, 'store']);
