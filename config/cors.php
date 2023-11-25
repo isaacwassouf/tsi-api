@@ -21,6 +21,7 @@ return [
 
     'allowed_origins' => [
         'http://localhost:4000',
+        'http://app.pwa-tsi.local'
     ],
 
     'allowed_origins_patterns' => [],

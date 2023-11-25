@@ -31,3 +31,9 @@ create-feature-test:
 
 run-tests:
 	php artisan test
+
+docker-migrate:
+	docker exec -it tsi_api /bin/sh -c 'php artisan migrate'
+
+docker-clear-cache:
+	docker exec -it tsi_api /bin/sh -c "php artisan cache:clear && php artisan route:clear && php artisan view:cache && php artisan view:cache && php artisan clear-compiled"
