@@ -21,6 +21,15 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod +x /usr/local/bin/install-php-extensions && \
     install-php-extensions pdo pdo_mysql
 
+# Install Composer
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+# install git and zip
+RUN apt-get update && apt-get install -y git zip
+
+# Install dependencies
+RUN composer install --no-dev --no-interaction --no-progress --no-suggest --optimize-autoloader
+
 # Expose port 8080 for Nginx Unit
 EXPOSE 8080
 
